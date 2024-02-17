@@ -14,8 +14,15 @@ services:
       - db
 
   db:
-    image: postgres:latest
+    platform: linux/x86_64
+    image: mysql:5.7.22
+    restart: always
     environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
+      MYSQL_DATABASE: admin
+      # MYSQL_USER: root
+      # MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - 33066:3306
